@@ -1,0 +1,7 @@
+{
+    "PROJECT_NAME": "bgs_deploy",
+    "AWS_PROFILE": "eq_sanhe",
+    "AWS_REGION": "us-east-1",
+    "AWS_ACCOUNT_ID": "110330507156",
+    "S3_BUCKET_FOR_DEPLOY": "eq-sanhe-for-everything"
+}

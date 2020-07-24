@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+This is a bin tool allows you to use constant or dynamic config value defined
+in centralize config management system in shell script or cli interface.
+
+**Usage**:
+
+In your shell script:
+
+.. code-block:: bash
+
+    CMS_GITHUB_ACCESS_TOKEN="$(python ./config/get-config-value CMS_GITHUB_ACCESS_TOKEN)"
+    git clone https://${CMS_GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_ACCOUNT}/${REPO}
+"""
+
+import idm_devops
+from idm_devops.devops.config_init import config
+
+if __name__ == "__main__":
+    import sys
+
+    field_name = sys.argv[1]
+    print(getattr(config, field_name).get_value())
