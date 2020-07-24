@@ -19,7 +19,7 @@ class Config(ConfigClass):
 
     @ENVIRONMENT_NAME.getter
     def get_ENVIRONMENT_NAME(self):
-        return "{}-{}".format(self.PROJECT_NAME_SLUG.get_value(self), self.STAGE.get_value())
+        return "{}-{}".format(self.PROJECT_NAME_SLUG.get_value(), self.STAGE.get_value())
 
     AWS_PROFILE = Constant()
 
@@ -39,3 +39,9 @@ class Config(ConfigClass):
     AWS_REGION = Constant()
     AWS_ACCOUNT_ID = Constant(printable=False)
     S3_BUCKET_FOR_DEPLOY = Constant()
+
+    ECS_EXAMPLE_ENVIRONMENT_NAME = Derivable()
+
+    @ECS_EXAMPLE_ENVIRONMENT_NAME.getter
+    def get_ECS_EXAMPLE_ENVIRONMENT_NAME(self):
+        return "{}-ecs-example".format(self.ENVIRONMENT_NAME.get_value())

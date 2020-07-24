@@ -14,21 +14,24 @@ from Python.
 """
 
 import boto3
-from bgs_deploy.cf import config, template, param_env_name
+from bgs_deploy.cf import ecs_example
 from troposphere_mate import StackManager
+
+config = ecs_example.config
+ecs_example.template.add_resource(ecs_example.ecr_repo_webapp)
 
 boto_ses = boto3.session.Session(
     profile_name=config.AWS_PROFILE_FOR_BOTO3.get_value(),
     region_name=config.AWS_REGION.get_value(),
 )
 
-sm = StackManager(boto_ses=boto_ses, cft_bucket=config.S3_BUCKET_FOR_DEPLOY.get_value())
+sm = StackManager(boto_ses=boto_ses, cft_bucket=ecs_example.config.S3_BUCKET_FOR_DEPLOY.get_value())
 
 sm.deploy(
-    template=template,
-    stack_name="pygitrepo-{}".format(config.ENVIRONMENT_NAME.get_value()),
+    template=ecs_example.template,
+    stack_name=config.ECS_EXAMPLE_ENVIRONMENT_NAME.get_value(),
     stack_parameters={
-        param_env_name.title: "pygitrepo-{}".format(config.ENVIRONMENT_NAME.get_value()),
+        ecs_example.param_env_name.title: config.ECS_EXAMPLE_ENVIRONMENT_NAME.get_value(),
     },
     include_iam=True
 )
