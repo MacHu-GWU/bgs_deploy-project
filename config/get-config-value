@@ -11,12 +11,12 @@ In your shell script:
 
 .. code-block:: bash
 
-    CMS_GITHUB_ACCESS_TOKEN="$(python ./config/get-config-value CMS_GITHUB_ACCESS_TOKEN)"
-    git clone https://${CMS_GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_ACCOUNT}/${REPO}
+    GITHUB_ACCESS_TOKEN="$(python ./config/get-config-value GITHUB_ACCESS_TOKEN)"
+    git clone https://${GITHUB_ACCESS_TOKEN}@github.com/${GITHUB_ACCOUNT}/${REPO}
 """
 
-import idm_devops
-from idm_devops.devops.config_init import config
+import bgs_deploy
+from bgs_deploy.devops.config_init import config
 
 if __name__ == "__main__":
     import sys
