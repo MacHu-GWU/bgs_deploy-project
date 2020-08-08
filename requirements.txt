@@ -1,2 +1,4 @@
-
-configirl==0.0.7
+configirl==0.0.8
+attrs==19.3.0
+attrs-mate==0.0.5
+constant2==0.0.13
